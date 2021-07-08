@@ -9,12 +9,17 @@
 <body>
   <h1>Transliteration</h1>
 
+  <select name="language-list" id="language-list">
+    <option value="persian">Persian</option>
+    <option value="russian">Russian</option>
+  </select>
+
   <div class="panel-container">
     <div class="panel">
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <textarea name="input" id="input" cols="30" rows="10"></textarea>
     </div>
     <div class="panel">
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <textarea name="output" id="output" cols="30" rows="10" readonly></textarea>
     </div>
   </div>
 
@@ -29,7 +34,27 @@
   </style>
 
   <script>
+    function transliterationToPersian() {
+      const inputText = document.querySelector('#input').value
 
+      const regexA = /a/g
+
+      const transliterationProcess = inputText.match(regexA)
+
+      transliterationProcess.forEach(letter => {
+        document.querySelector('#output').value = 'ا'
+      })
+    }
+
+    document.addEventListener('keyup', event => {
+      if (document.querySelector('#language-list').value === 'persian') {
+        transliterationToPersian()
+
+        console.log('Persian transliteration')
+      } else if (document.querySelector('#language-list').value === 'russian') {
+        console.log('Russian transliteration')
+      }
+    })
   </script>
 </body>
 </html>
